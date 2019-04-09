@@ -1,0 +1,28 @@
+.main-box{
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 10% auto;
+  padding: 4% 5%;
+  border-radius: 8px;
+  width: 30%;
+}
+.mb-2{
+  margin-bottom: 40px;
+}
+.inner-box{
+  margin: 10px 0px;
+}
+
+.form-field{
+  margin-top: 10px;
+  width: 100%;
+}
+
+.form-button{
+  margin-top: 17px;
+  width: 100%;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}

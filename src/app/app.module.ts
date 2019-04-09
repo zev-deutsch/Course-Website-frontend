@@ -10,12 +10,15 @@ import {MatButtonModule, MatInputModule, MatTabsModule} from '@angular/material'
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import {MatListModule, MatToolbarModule} from '@angular/material';
+import {MatRadioModule} from '@angular/material/radio';
+import { RegisterComponent } from './views/users/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import {MatListModule, MatToolbarModule} from '@angular/material';
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
