@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {getAnnouncements} from '../../../models/getAnnouncements';
+import {GetAnnouncements} from '../../../models/getAnnouncements';
 
 @Component({
   selector: 'app-announcement',
@@ -7,7 +7,7 @@ import {getAnnouncements} from '../../../models/getAnnouncements';
   styleUrls: ['./announcement.component.scss']
 })
 export class AnnouncementComponent implements OnInit {
-  @Input() announcement: getAnnouncements;
+  @Input() announcement: GetAnnouncements;
   constructor() {
   }
 

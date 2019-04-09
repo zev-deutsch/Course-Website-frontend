@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Announcement} from '../../../models/Announcement';
 import {DataService} from '../../../models/data.service';
-import {getAnnouncements} from '../../../models/getAnnouncements';
+import {GetAnnouncements} from '../../../models/getAnnouncements';
 
 @Component({
   selector: 'app-announcements',
@@ -10,7 +10,7 @@ import {getAnnouncements} from '../../../models/getAnnouncements';
 })
 export class AnnouncementsComponent implements OnInit {
   addannouncement: Announcement[];
-  getannouncements: getAnnouncements[];
+  getannouncements: GetAnnouncements[];
   announcement = new Announcement(0, '');
 
   constructor(private dataService: DataService) { }
@@ -20,14 +20,15 @@ export class AnnouncementsComponent implements OnInit {
   }
 
   addAnnouncement() {
-    this.dataService.addAnnouncement(this.announcement).subscribe((res: Announcement[]) => {
-      this.addannouncement = res;
-    });
+    this.dataService.addAnnouncement(this.announcement).subscribe();
   }
 
   getAnnouncements(): void {
-    this.dataService.getAnnouncements().subscribe((res: getAnnouncements[]) => {
-      this.getannouncements = res;
+    this.dataService.getAnnouncements().subscribe((res) => {
+      this.getannouncements = [];
+      res.map((item) => {
+        this.getannouncements.push(new GetAnnouncements(item));
+      });
     });
   }
 }

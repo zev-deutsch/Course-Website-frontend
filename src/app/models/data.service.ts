@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Announcement } from './Announcement';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { getAnnouncements } from './getAnnouncements';
+import { GetAnnouncements } from './getAnnouncements';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,11 @@ import { getAnnouncements } from './getAnnouncements';
 export class DataService {
   baseUrl = 'http://localhost/backend/';
   announcement: Announcement[];
-  announcements: getAnnouncements[];
+  announcements: GetAnnouncements[];
   constructor(private http: HttpClient) { }
 
   addAnnouncement(announcement: Announcement): Observable<Announcement[]> {
-    return this.http.post(this.baseUrl + 'initial/addAnnouncement', {announcement}).pipe(
+    return this.http.post(this.baseUrl + 'teachers/addAnnouncement', {announcement}).pipe(
       map((res) => {
         this.announcement.push(res['announcement']);
         return this.announcement;
@@ -23,11 +23,7 @@ export class DataService {
     );
   }
 
-  getAnnouncements(): Observable<getAnnouncements[]> {
-    return this.http.get(this.baseUrl + 'initial/getAnnouncements').pipe(map((res) => {
-      this.announcements = res['data'];
-      return this.announcements;
-    })
-    );
+  getAnnouncements(): Observable<GetAnnouncements[]> {
+    return this.http.get<GetAnnouncements[]>(this.baseUrl + 'initials/GetAnnouncements');
   }
 }
