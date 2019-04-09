@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {getAnnouncements} from '../../../models/getAnnouncements';
 
 @Component({
   selector: 'app-announcement',
@@ -6,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./announcement.component.scss']
 })
 export class AnnouncementComponent implements OnInit {
-
-  constructor() {
+  @Input() announcement: getAnnouncements[];
+  constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
