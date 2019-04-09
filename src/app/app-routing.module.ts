@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './views/users/login/login.component';
 import {RegisterSuccessComponent} from './views/users/register-success/register-success.component';
+import {AssignmentsComponent} from './views/assignments/assignments/assignments.component';
+import {AssignmentComponent} from './views/assignments/assignment/assignment.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'register_success', component: RegisterSuccessComponent },
+  { path: 'register_success', component: RegisterSuccessComponent }
 ];
 
 @NgModule({
