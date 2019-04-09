@@ -1,10 +1,9 @@
-
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container>
   <mat-sidenav class="sidenav" fixedInViewport="true"
                [attr.role]="'navigation'"
                [mode]="'side'"
                [opened]="true">
-    <mat-toolbar routerLink="home">Omnivox</mat-toolbar>
+    <mat-toolbar class="app-name" routerLink="">Omnivox</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="login">Login</a>
       <a mat-list-item routerLink="register">Register</a>
