@@ -10,12 +10,17 @@ import {MatButtonModule, MatInputModule, MatTabsModule} from '@angular/material'
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import {MatListModule, MatToolbarModule} from '@angular/material';
+import { AnnouncementsComponent } from './views/announcements/announcements/announcements.component';
+import { AnnouncementComponent } from './views/announcements/announcement/announcement.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    AnnouncementsComponent,
+    AnnouncementComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,8 @@ import {MatListModule, MatToolbarModule} from '@angular/material';
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
