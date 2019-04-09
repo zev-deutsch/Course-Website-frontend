@@ -10,23 +10,22 @@ import {MatButtonModule, MatIconModule, MatInputModule, MatTabsModule} from '@an
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import {MatListModule, MatToolbarModule} from '@angular/material';
-<<<<<<< HEAD
 import {MatRadioModule} from '@angular/material/radio';
 import { RegisterComponent } from './views/users/register/register.component';
-=======
 import { RegisterSuccessComponent } from './views/users/register-success/register-success.component';
->>>>>>> 2012780832c35e0806faae490d81e41e2faf2034
+import { AnnouncementsComponent } from './views/announcements/announcements/announcements.component';
+import { AnnouncementComponent } from './views/announcements/announcement/announcement.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-<<<<<<< HEAD
-    RegisterComponent
-=======
-    RegisterSuccessComponent
->>>>>>> 2012780832c35e0806faae490d81e41e2faf2034
+    RegisterComponent,
+    RegisterSuccessComponent,
+    AnnouncementsComponent,
+    AnnouncementComponent
   ],
   imports: [
     BrowserModule,
@@ -39,11 +38,9 @@ import { RegisterSuccessComponent } from './views/users/register-success/registe
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-<<<<<<< HEAD
-    MatRadioModule
-=======
-    MatIconModule
->>>>>>> 2012780832c35e0806faae490d81e41e2faf2034
+    MatRadioModule,
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
