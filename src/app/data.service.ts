@@ -15,7 +15,7 @@ export class DataService {
   addAnnouncement(announcement: Announcement): Observable<Announcement[]> {
     return this.http.post(this.baseUrl + 'initial/addAnnouncement', {announcement}).pipe(
       map((res) => {
-        this.announcement.push(res.announcement);
+        this.announcement.push(res['announcement']);
         return this.announcement;
       })
     );
