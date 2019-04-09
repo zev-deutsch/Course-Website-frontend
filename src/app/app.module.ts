@@ -6,19 +6,27 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent} from './views/users/login/login.component';
-import {MatButtonModule, MatInputModule, MatTabsModule} from '@angular/material';
+import {MatButtonModule, MatIconModule, MatInputModule, MatTabsModule} from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import {MatListModule, MatToolbarModule} from '@angular/material';
+<<<<<<< HEAD
 import {MatRadioModule} from '@angular/material/radio';
 import { RegisterComponent } from './views/users/register/register.component';
+=======
+import { RegisterSuccessComponent } from './views/users/register-success/register-success.component';
+>>>>>>> 2012780832c35e0806faae490d81e41e2faf2034
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
+<<<<<<< HEAD
     RegisterComponent
+=======
+    RegisterSuccessComponent
+>>>>>>> 2012780832c35e0806faae490d81e41e2faf2034
   ],
   imports: [
     BrowserModule,
@@ -31,7 +39,11 @@ import { RegisterComponent } from './views/users/register/register.component';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+<<<<<<< HEAD
     MatRadioModule
+=======
+    MatIconModule
+>>>>>>> 2012780832c35e0806faae490d81e41e2faf2034
   ],
   providers: [],
   bootstrap: [AppComponent]
