@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Announcement} from '../../../models/announcements/Announcement';
 import {DataService} from '../../../models/data.service';
 import {GetAnnouncements} from '../../../models/announcements/getAnnouncements';
+import {AuthService} from "../../../models/users/auth.service";
 
 @Component({
   selector: 'app-announcements',
@@ -12,10 +13,12 @@ export class AnnouncementsComponent implements OnInit {
   addannouncement: Announcement[];
   getannouncements: GetAnnouncements[];
   announcement = new Announcement(0, '');
+  private loggedIn: string;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.loggedIn = this.authService.loggedIn();
     this.getAnnouncements();
   }
 

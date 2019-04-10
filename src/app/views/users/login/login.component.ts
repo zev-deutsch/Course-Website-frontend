@@ -13,10 +13,13 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isSubmitted = false;
+  private loggedIn: string;
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder ) { }
 
   ngOnInit() {
+    this.loggedIn = this.authService.loggedIn();
+
     this.loginForm = this.formBuilder.group({
       id: ['', Validators.required],
       password: ['', Validators.required]

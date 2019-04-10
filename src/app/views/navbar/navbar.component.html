@@ -1,3 +1,4 @@
+<div>
 <mat-sidenav-container>
   <mat-sidenav class="sidenav" fixedInViewport="true"
                [attr.role]="'navigation'"
@@ -5,16 +6,23 @@
                [opened]="true">
     <mat-toolbar class="app-name" routerLink="">Omnivox</mat-toolbar>
     <mat-nav-list>
-      <span *ngIf="!loggedIn">
-        <p class="t-s-name">Welcome Teacher/Student<br>name</p>
-        <a mat-list-item routerLink="">Announcements</a>
+      <span *ngIf="loggedIn == 'main'">
+        <a mat-list-item routerLink="announcements">Announcements</a>
+        <a mat-list-item routerLink="register">Register</a>
+        <a mat-list-item routerLink="login">Login</a>
+      </span>
+      <span *ngIf="loggedIn == 'student' || loggedIn == 'teacher'">
+        <p class="t-s-name">Welcome name</p>
+        <a mat-list-item routerLink="announcements">Announcements</a>
         <a mat-list-item routerLink="assignments">Assignments</a>
         <a mat-list-item (click)="logout()">Logout</a>
-      </span>
-      <span *ngIf="!loggedIn">
-        <a mat-list-item routerLink="login">Login</a>
-        <a mat-list-item routerLink="register">Register</a>
       </span>
     </mat-nav-list>
   </mat-sidenav>
 </mat-sidenav-container>
+  <div style="margin-left: 25%">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+

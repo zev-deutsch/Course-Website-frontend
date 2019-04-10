@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../../models/data.service';
 import {ViewAssignments} from '../../../models/assignments/View-Assignments';
+import {AuthService} from "../../../models/users/auth.service";
 
 @Component({
   selector: 'app-assignments',
@@ -10,9 +11,11 @@ import {ViewAssignments} from '../../../models/assignments/View-Assignments';
 export class AssignmentsComponent implements OnInit {
   getAssignments: ViewAssignments[];
   id = 1;
-  constructor(private dataService: DataService) { }
+  private loggedIn: string;
+  constructor(private dataService: DataService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.loggedIn = this.authService.loggedIn();
     this.getAssignment(this.id);
   }
 

@@ -1,6 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {ViewAssignments} from '../../../models/assignments/View-Assignments';
+import {AuthService} from "../../../models/users/auth.service";
 
 @Component({
   selector: 'app-assignment',
@@ -9,9 +10,11 @@ import {ViewAssignments} from '../../../models/assignments/View-Assignments';
 })
 export class AssignmentComponent implements OnInit {
   @Input() assignment: ViewAssignments;
-  constructor(public dialog: MatDialog) {}
+  private loggedIn: string;
+  constructor(public dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
+    this.loggedIn = this.authService.loggedIn();
   }
 
   openDialog(): void {
