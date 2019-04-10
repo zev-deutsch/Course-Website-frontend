@@ -1,5 +1,15 @@
-<div>
-  {{announcement.teacherName}}
-  {{announcement.date}}
-  {{announcement.body}}
-</div>
+<mat-card class="main">
+  <mat-card-header class="head">
+    <mat-card-title>{{announcement.date}}</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <p class="due-date">Teacher: {{announcement.teacherName}}</p>
+  <mat-card-content>
+    <p class="body">
+      {{announcement.body}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="submit-button">
+    <button mat-raised-button (click)="markRead()">MARK AS READ</button>
+  </mat-card-actions>
+</mat-card>

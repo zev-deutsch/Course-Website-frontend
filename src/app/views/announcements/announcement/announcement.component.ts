@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GetAnnouncements} from '../../../models/getAnnouncements';
+import {GetAnnouncements} from '../../../models/announcements/getAnnouncements';
 
 @Component({
   selector: 'app-announcement',
@@ -12,6 +12,10 @@ export class AnnouncementComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+// TODO bounes mark as read function
+  markRead() {
+
   }
 }
 

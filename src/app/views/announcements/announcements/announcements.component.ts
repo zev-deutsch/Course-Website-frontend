@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Announcement} from '../../../models/Announcement';
+import {Announcement} from '../../../models/announcements/Announcement';
 import {DataService} from '../../../models/data.service';
-import {GetAnnouncements} from '../../../models/getAnnouncements';
+import {GetAnnouncements} from '../../../models/announcements/getAnnouncements';
 
 @Component({
   selector: 'app-announcements',

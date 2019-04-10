@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Announcement } from './Announcement';
+import { Announcement } from './announcements/Announcement';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { GetAnnouncements } from './getAnnouncements';
+import { GetAnnouncements } from './announcements/getAnnouncements';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,6 @@ export class DataService {
   }
 
   getAnnouncements(): Observable<GetAnnouncements[]> {
-    return this.http.get<GetAnnouncements[]>(this.baseUrl + 'initials/GetAnnouncements');
+    return this.http.get<GetAnnouncements[]>(this.baseUrl + 'initials/getAnnouncements');
   }
 }

@@ -7,6 +7,7 @@ import {AssignmentsComponent} from './views/assignments/assignments/assignments.
 import {AnnouncementsComponent} from './views/announcements/announcements/announcements.component';
 
 const routes: Routes = [
+  {path: '', pathMatch: 'full', redirectTo: 'announcements'},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'register_success', component: RegisterSuccessComponent },

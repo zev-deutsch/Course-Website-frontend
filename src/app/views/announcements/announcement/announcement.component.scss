@@ -1,0 +1,27 @@
+.main{
+  background-color: whitesmoke;
+  margin: 20px auto;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  width: 75%;
+  clear: both;
+}
+
+.head{
+  float: left;
+}
+
+.due-date{
+  float: right;
+  margin-top: 0;
+}
+
+.body{
+  clear: both;
+  margin: 0 16px;
+  padding-top: 10px;
+}
+
+.submit-button{
+  margin-left: 16px;
+}

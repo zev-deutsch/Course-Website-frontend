@@ -1,3 +1,8 @@
+
+  <div class="submit-button">
+    <h2>Announcements</h2>
+    <button mat-raised-button (click)="openDialog()">ADD ANNOUNCEMENT</button>
+  </div>
 <div *ngFor="let announcement of getannouncements">
   <app-announcement [announcement]="announcement"></app-announcement>
 </div>
