@@ -1,17 +1,23 @@
 <mat-card class="main">
   <mat-card-header class="head">
-    <mat-card-title>Subject</mat-card-title>
-    <mat-card-subtitle>Teachers name</mat-card-subtitle>
+    <mat-card-title>{{assignment.subject}}</mat-card-title>
+    <mat-card-subtitle>Teacher: {{assignment.teacherName}}</mat-card-subtitle>
   </mat-card-header>
-  <p class="due-date">Date</p>
+  <div class="due-date">
+  Due Date: {{assignment.releaseDate}}<br>
+  Release Date: {{assignment.dueDate}}
+  </div>
   <mat-card-content>
     <p class="body">
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
+      {{assignment.body}}
     </p>
   </mat-card-content>
+  <span *ngIf="!assignment.grade">
   <mat-card-actions class="submit-button">
     <button mat-raised-button (click)="openDialog()">SUBMIT ASSIGNMENT</button>
   </mat-card-actions>
+    </span>
+  <span *ngIf="assignment.grade" class="submit-button">
+  Grade: {{assignment.grade}} Submit Date: {{assignment.submittedDate}}
+    </span>
 </mat-card>

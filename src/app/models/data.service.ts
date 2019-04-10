@@ -4,6 +4,7 @@ import { Announcement } from './announcements/Announcement';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { GetAnnouncements } from './announcements/getAnnouncements';
+import {ViewAssignments} from './assignments/View-Assignments';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class DataService {
 
   getAnnouncements(): Observable<GetAnnouncements[]> {
     return this.http.get<GetAnnouncements[]>(this.baseUrl + 'initials/getAnnouncements');
+  }
+
+  getAssignment(id: number): Observable<ViewAssignments[]> {
+    return this.http.get<ViewAssignments[]>(this.baseUrl + 'Students/listAssignments/'+ id);
   }
 }

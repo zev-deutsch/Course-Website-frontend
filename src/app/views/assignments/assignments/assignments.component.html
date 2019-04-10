@@ -1,6 +1,9 @@
 <h1 class="mat-display-1">Assignments</h1>
-<mat-tab-group>
-  <mat-tab label="First"> Content 1 </mat-tab>
-  <mat-tab label="Second"> Content 2 </mat-tab>
-  <mat-tab label="Third"> Content 3 </mat-tab>
-</mat-tab-group>
+<!--<mat-tab-group>-->
+<!--  <mat-tab label="Not Yet Released"> <app-assignment></app-assignment> </mat-tab>-->
+<!--  <mat-tab label="Current "> <app-assignment></app-assignment> </mat-tab>-->
+<!--  <mat-tab label="Passed"> <app-assignment></app-assignment> </mat-tab>-->
+<!--</mat-tab-group>-->
+<div *ngFor="let assignment of getAssignments">
+  <app-assignment [assignment]="assignment"></app-assignment>
+</div>

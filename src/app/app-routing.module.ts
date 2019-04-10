@@ -5,6 +5,7 @@ import { RegisterComponent } from './views/users/register/register.component';
 import {RegisterSuccessComponent} from './views/users/register-success/register-success.component';
 import {AssignmentsComponent} from './views/assignments/assignments/assignments.component';
 import {AnnouncementsComponent} from './views/announcements/announcements/announcements.component';
+import {AssignmentComponent} from './views/assignments/assignment/assignment.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'announcements'},
@@ -12,6 +13,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'register_success', component: RegisterSuccessComponent },
   { path: 'assignments', component: AssignmentsComponent },
+  // just for debugging
+  { path: 'assignment', component: AssignmentComponent },
   { path: 'announcements', component: AnnouncementsComponent}
 ];
 
