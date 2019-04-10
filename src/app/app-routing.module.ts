@@ -18,7 +18,8 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent},
       // TODO remove entire register_success component and give a popup and redirect to login
-      { path: 'register_success', component: RegisterSuccessComponent }
+      { path: 'register_success', component: RegisterSuccessComponent },
+      { path: '**', redirectTo: 'announcements'}
     ]
   },
 
@@ -26,7 +27,8 @@ const routes: Routes = [
     path: 'student', component: NavbarComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'announcements'},
       { path: 'announcements', component: AnnouncementsComponent},
-      { path: 'assignments', component: AssignmentsComponent }
+      { path: 'assignments', component: AssignmentsComponent },
+      { path: '**', redirectTo: 'announcements'}
     ]
   },
 
@@ -34,10 +36,11 @@ const routes: Routes = [
     path: 'teacher', component: NavbarComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'announcements'},
       { path: 'announcements', component: AnnouncementsComponent},
-      { path: 'assignments', component: AssignmentsComponent }
+      { path: 'assignments', component: AssignmentsComponent },
+      { path: '**', redirectTo: 'announcements'}
     ]
   },
-  { path: '**', redirectTo: ''}
+  { path: '**', redirectTo: 'main'}
 ];
 
 @NgModule({
