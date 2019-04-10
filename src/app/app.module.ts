@@ -28,6 +28,7 @@ import {
   AssignmentSubmissionDialogComponent
 } from './views/assignments/assignment/assignment.component';
 import { AssignmentsComponent } from './views/assignments/assignments/assignments.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import { AssignmentsComponent } from './views/assignments/assignments/assignment
     MatIconModule,
     MatCardModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

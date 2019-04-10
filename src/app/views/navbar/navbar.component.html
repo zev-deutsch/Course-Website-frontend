@@ -5,7 +5,8 @@
                [opened]="true">
     <mat-toolbar class="app-name" routerLink="">Omnivox</mat-toolbar>
     <mat-nav-list>
-      <span *ngIf="loggedIn">
+      <span *ngIf="!loggedIn">
+        <p class="t-s-name">Welcome Teacher/Student<br>name</p>
         <a mat-list-item routerLink="">Announcements</a>
         <a mat-list-item routerLink="assignments">Assignments</a>
         <a mat-list-item (click)="logout()">Logout</a>
