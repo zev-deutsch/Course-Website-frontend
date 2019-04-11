@@ -1,9 +1,11 @@
 <h1 mat-dialog-title>Submit assignment</h1>
 <div mat-dialog-content>
   <p>Assignment name</p>
-  <mat-form-field>
-    <textarea matInput placeholder="Link to your github repo"></textarea>
-  </mat-form-field>
+  <form>
+    <mat-form-field>
+      <textarea matInput placeholder="Link to your github repo" [(ngModel)]="githubRepo" name="githubRepo" required></textarea>
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="submitAssignment()">Submit</button>
