@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { GetAnnouncements } from './announcements/getAnnouncements';
 import {ViewAssignments} from './assignments/View-Assignments';
+import {Submissions} from './assignments/Submissions';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class DataService {
   }
 
   getAssignment(id: number): Observable<ViewAssignments[]> {
-    return this.http.get<ViewAssignments[]>(this.baseUrl + 'Students/listAssignments/'+ id);
+    return this.http.get<ViewAssignments[]>(this.baseUrl + 'Students/listAssignments/' + id);
+  }
+
+  submitAssignment(data: Submissions): Observable<Submissions[]> {
+    return this.http.post<any[]>(this.baseUrl + 'Students/addSubmission', {data});
   }
 }
