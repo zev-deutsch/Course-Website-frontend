@@ -11,7 +11,7 @@ import {
   MatCardModule,
   MatDialogModule,
   MatIconModule,
-  MatInputModule, MatSnackBarModule,
+  MatInputModule, MatNativeDateModule, MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -20,7 +20,10 @@ import {MatListModule, MatToolbarModule} from '@angular/material';
 import {MatRadioModule} from '@angular/material/radio';
 import { RegisterComponent } from './views/users/register/register.component';
 import { RegisterSuccessComponent } from './views/users/register-success/register-success.component';
-import { AnnouncementsComponent } from './views/announcements/announcements/announcements.component';
+import {
+  AddAnnouncementsDialogComponent,
+  AnnouncementsComponent
+} from './views/announcements/announcements/announcements.component';
 import { AnnouncementComponent } from './views/announcements/announcement/announcement.component';
 import {HttpClientModule} from '@angular/common/http';
 import {
@@ -29,6 +32,7 @@ import {
 } from './views/assignments/assignment/assignment.component';
 import { AssignmentsComponent } from './views/assignments/assignments/assignments.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     RegisterSuccessComponent,
     AssignmentComponent,
     AssignmentsComponent,
-    AssignmentSubmissionDialogComponent
+    AssignmentSubmissionDialogComponent,
+    AddAnnouncementsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -63,10 +68,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatDialogModule,
     MatSnackBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AssignmentSubmissionDialogComponent]
+  entryComponents: [AssignmentSubmissionDialogComponent, AddAnnouncementsDialogComponent]
 })
 export class AppModule { }

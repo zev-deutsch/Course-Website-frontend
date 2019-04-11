@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Add Announcement</h1>
+<form class="modal">
+<mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Subject:" name="subject" required>
+    </mat-form-field>
+  <br>
+    <mat-form-field>
+      <input matInput [matDatepicker]="releaseDatePicker"  placeholder="Release Date:" name="releasedate" required>
+      <mat-datepicker-toggle matSuffix [for]="releaseDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #releaseDatePicker></mat-datepicker>
+    </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput [matDatepicker]="dueDatePicker"  placeholder="dueDate:" name="duedate" required>
+    <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #dueDatePicker></mat-datepicker>
+  </mat-form-field>
+  <br>
+    <mat-form-field>
+      <input matInput placeholder="Body:" name="body" required>
+    </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="submitAnnouncement()">Submit</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+</form>
+
+
+
