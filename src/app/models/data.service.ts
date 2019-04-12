@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Announcement } from './announcements/Announcement';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { GetAnnouncements } from './announcements/getAnnouncements';
 import {ViewAssignments} from './assignments/View-Assignments';
 import {Submissions} from './assignments/Submissions';
+import {LoggedInfo} from './users/LoggedInfo';
+import {User} from './users/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   baseUrl = 'http://localhost/backend/';
-  announcement: Announcement[];
   announcements: GetAnnouncements[];
   submit: any;
   headers = new HttpHeaders({
-    'content-type': 'application/x-www-form-urlencoded'
+    'content-Type': 'application/x-www-form-urlencoded'
   });
+  
   constructor(private http: HttpClient) { }
 
   addAnnouncement(announcement: Announcement): Observable<Announcement[]> {
@@ -36,5 +37,14 @@ export class DataService {
   submitAssignment(data: Submissions): Observable<Submissions[]> {
     const params = `text=${data.text}&studentId=${data.studentId}&assignmentId=${data.assignmentId}`;
     return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', params, {headers: this.headers});
+  }
+
+  login(args: User): Observable<LoggedInfo> {
+    const params = `id=${args.id}&password=${args.password}`;
+    return this.http.post<LoggedInfo>(this.baseUrl + 'students/login', params, {headers: this.headers});
+  }
+
+  logout(accountType) {
+    return this.http.get<ViewAssignments[]>(this.baseUrl + accountType + 's/logout');
   }
 }

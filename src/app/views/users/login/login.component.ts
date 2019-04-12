@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
 import { User} from '../../../models/users/user';
 import {AuthService} from '../../../models/users/auth.service';
+import {element} from "protractor";
+import {getValue} from "@angular/core/src/render3/styling/class_and_style_bindings";
+import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
+import {visitValue} from "@angular/compiler/src/util";
+import {DataService} from '../../../models/data.service';
+import {LoggedInfo} from '../../../models/users/LoggedInfo';
 
 @Component({
   selector: 'app-login',
@@ -13,23 +19,26 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isSubmitted = false;
-  private loggedIn: string;
+  loggedIn: string;
+  userObject: User;
+  msg: string;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder ) { }
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private dataService: DataService) { }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedIn();
+    // this.loggedIn = this.authService.loggedIn();
 
     this.loginForm = this.formBuilder.group({
       id: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      accountType: 'student'
     });
   }
 
   get formControls() { return this.loginForm.controls; }
 
   login() {
-    console.log(this.loginForm.value);
+
     // Set isSubmitted to true
     this.isSubmitted = true;
 
@@ -38,9 +47,24 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.userObject = new User(this.loginForm.value);
+    console.log(this.userObject);
+
     // Process form
-    this.authService.login(this.loginForm.value);
-    this.router.navigateByUrl(''); // TODO change
+    this.dataService.login(this.userObject).subscribe(
+      (res) => {
+        if (res.error) {
+          this.msg = res.error;
+        } else {
+          this.authService.login(res);
+          this.router.navigateByUrl(res.accountType);
+        }
+      }
+    );
+
+
+    // this.authService.login(this.loginForm.value);
+    // this.router.navigateByUrl('student'); // TODO change
   }
 
 }
