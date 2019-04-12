@@ -21,12 +21,8 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   addAnnouncement(announcement: Announcement): Observable<Announcement[]> {
-    return this.http.post(this.baseUrl + 'teachers/addAnnouncement', {announcement}).pipe(
-      map((res) => {
-        this.announcement.push(res['announcement']);
-        return this.announcement;
-      })
-    );
+    const params = `teacherid=${announcement.teacherId}&body=${announcement.body}`;
+    return this.http.post<Announcement[]>(this.baseUrl + 'teachers/addAnnouncement', params, {headers: this.headers});
   }
 
   getAnnouncements(): Observable<GetAnnouncements[]> {
@@ -38,9 +34,7 @@ export class DataService {
   }
 
   submitAssignment(data: Submissions): Observable<Submissions[]> {
-    const text = data.text;
-    const assignmentId = data.assignmentId;
-    const studentId = data.studentId;
-    return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', {text, assignmentId, studentId}, {headers: this.headers});
+    const params = `text=${data.text}&studentId=${data.studentId}&assignmentId=${data.assignmentId}`;
+    return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', params, {headers: this.headers});
   }
 }

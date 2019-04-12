@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Add Announcement</h1>
+<form class="modal">
+<mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Body:" [(ngModel)]="announcement.body" name="body" required>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="addAnnouncement()">Submit</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+</form>
+
+
+

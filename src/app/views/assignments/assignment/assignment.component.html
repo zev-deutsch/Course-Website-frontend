@@ -12,12 +12,12 @@
       {{assignment.body}}
     </p>
   </mat-card-content>
-  <span *ngIf="!assignment.grade">
+  <span *ngIf="!assignment.grade && loggedIn == 'student'">
   <mat-card-actions class="submit-button">
     <button mat-raised-button (click)="openDialog()">SUBMIT ASSIGNMENT</button>
   </mat-card-actions>
     </span>
-  <span *ngIf="assignment.grade" class="submit-button">
+  <span *ngIf="assignment.grade && loggedIn == 'student'" class="submit-button">
   Grade: {{assignment.grade}} Submit Date: {{assignment.submittedDate}}
     </span>
 </mat-card>

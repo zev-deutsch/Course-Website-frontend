@@ -2,9 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Announcement} from '../../../models/announcements/Announcement';
 import {DataService} from '../../../models/data.service';
 import {GetAnnouncements} from '../../../models/announcements/getAnnouncements';
-import {AuthService} from "../../../models/users/auth.service";
-import {AssignmentSubmissionDialogComponent} from "../../assignments/assignment/assignment.component";
-import {MatDialog, MatSnackBar} from "@angular/material";
+import {AuthService} from '../../../models/users/auth.service';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-announcements',
@@ -14,18 +13,14 @@ import {MatDialog, MatSnackBar} from "@angular/material";
 export class AnnouncementsComponent implements OnInit {
   addannouncement: Announcement[];
   getannouncements: GetAnnouncements[];
-  announcement = new Announcement(0, '');
+
   private loggedIn: string;
 
-  constructor(private dataService: DataService, private authService: AuthService,public dialog: MatDialog) { }
+  constructor(private dataService: DataService, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loggedIn = this.authService.loggedIn();
     this.getAnnouncements();
-  }
-
-  addAnnouncement() {
-    this.dataService.addAnnouncement(this.announcement).subscribe();
   }
 
   getAnnouncements(): void {
@@ -44,26 +39,19 @@ export class AnnouncementsComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-addAnnouncements',
-  templateUrl: 'addAnnouncements.html',
+  selector: 'app-announcement-add',
+  templateUrl: 'announcement-add-dialog.html',
 })
 export class AddAnnouncementsDialogComponent {
-
-  constructor(private submitted: MatSnackBar) {
+  announcement = new Announcement(1, '');
+  constructor(private submitted: MatSnackBar, private dataService: DataService) {
 
   }
-  //   public dialogRef: MatDialogRef<AssignmentSubmissionDialogComponent>,
-  //   @Inject(MAT_DIALOG_DATA) public data: SubmitAssignment) {}
-  //
-  // cancelSubmission(): void {
-  //   this.dialogRef.close();
-  // }
-  submitAnnouncement() {
-    const submitDate = new Date();
-    this.submitted.open('Announcement submitted!', submitDate.toDateString(), {
+
+  addAnnouncement() {
+    this.dataService.addAnnouncement(this.announcement).subscribe(res => console.log(res));
+    this.submitted.open('Announcement added!', '', {
       duration: 2500,
     });
   }
-
-
 }

@@ -30,8 +30,8 @@ import {
   AssignmentComponent,
   AssignmentSubmissionDialogComponent
 } from './views/assignments/assignment/assignment.component';
-import { AssignmentsComponent } from './views/assignments/assignments/assignments.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AddAssignmentDialogComponent, AssignmentsComponent} from './views/assignments/assignments/assignments.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
@@ -47,7 +47,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AssignmentComponent,
     AssignmentsComponent,
     AssignmentSubmissionDialogComponent,
-    AddAnnouncementsDialogComponent
+    AddAnnouncementsDialogComponent,
+    AddAssignmentDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +76,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [AssignmentSubmissionDialogComponent, AddAnnouncementsDialogComponent]
+  entryComponents: [AssignmentSubmissionDialogComponent, AddAnnouncementsDialogComponent, AddAssignmentDialogComponent]
 })
 export class AppModule { }
