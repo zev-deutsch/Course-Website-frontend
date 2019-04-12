@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>Add Assignment</h1>
-<form class="modal">
+<form>
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput placeholder="Subject:" name="subject" required>
+      <input matInput placeholder="Subject:" style="width: 100%;" name="subject" required>
     </mat-form-field>
     <br>
     <mat-form-field>
@@ -23,7 +23,7 @@
 
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="addAssignment()">Submit</button>
-    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-raised-button mat-dialog-close (click)="addAssignment()">Submit</button>
+    <button mat-button mat-raised-button mat-dialog-close>Cancel</button>
   </mat-dialog-actions>
 </form>

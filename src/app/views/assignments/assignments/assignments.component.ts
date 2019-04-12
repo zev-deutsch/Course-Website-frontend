@@ -30,13 +30,17 @@ export class AssignmentsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddAssignmentDialogComponent);
+    const dialogRef = this.dialog.open(AddAssignmentDialogComponent,{
+      width: '500px'
+    });
   }
 }
 
 @Component({
   selector: 'app-assignment-add',
   templateUrl: 'assignment-add-dialog.html',
+  styleUrls: ['./assignment-add-dialog.scss']
+
 })
 export class AddAssignmentDialogComponent {
 
