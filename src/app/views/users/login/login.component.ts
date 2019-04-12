@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
 
 
     // this.authService.login(this.loginForm.value);
-    // this.router.navigateByUrl('student'); // TODO change
+    // this.router.navigateByUrl('student');
   }
 
 }

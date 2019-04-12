@@ -44,7 +44,9 @@ export class DataService {
     return this.http.post<LoggedInfo>(this.baseUrl + 'students/login', params, {headers: this.headers});
   }
 
-  logout(accountType) {
-    return this.http.get<ViewAssignments[]>(this.baseUrl + accountType + 's/logout');
+  logout(accountType, token): Observable<any>{
+    console.log(token);
+    const params = `token=${token}`;
+    return this.http.post<any>(this.baseUrl + accountType + 's/logout', params, {headers: this.headers});
   }
 }

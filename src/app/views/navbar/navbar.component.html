@@ -11,8 +11,8 @@
         <a mat-list-item routerLink="register">Register</a>
         <a mat-list-item routerLink="login">Login</a>
       </span>
-      <span *ngIf="loggedIn == 'student' || loggedIn == 'teacher'">
-        <p class="t-s-name">Welcome name</p>
+      <span *ngIf="authService.isLoggedIn">
+        <p class="t-s-name">Welcome {{authService.isLoggedIn.name}}</p>
         <a mat-list-item routerLink="announcements">Announcements</a>
         <a mat-list-item routerLink="assignments">Assignments</a>
         <a mat-list-item (click)="logout()">Logout</a>
