@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../../models/data.service';
 import {ViewAssignments} from '../../../models/assignments/View-Assignments';
-import {AuthService} from "../../../models/users/auth.service";
+import {AuthService} from '../../../models/users/auth.service';
 
 @Component({
   selector: 'app-assignments',
