@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Announcement } from './announcements/Announcement';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -14,6 +14,10 @@ export class DataService {
   baseUrl = 'http://localhost/backend/';
   announcement: Announcement[];
   announcements: GetAnnouncements[];
+  submit: any;
+  headers = new HttpHeaders({
+    'content-type': 'application/x-www-form-urlencoded'
+  });
   constructor(private http: HttpClient) { }
 
   addAnnouncement(announcement: Announcement): Observable<Announcement[]> {
@@ -34,6 +38,9 @@ export class DataService {
   }
 
   submitAssignment(data: Submissions): Observable<Submissions[]> {
-    return this.http.post<any[]>(this.baseUrl + 'Students/addSubmission', {data});
+    const text = data.text;
+    const assignmentId = data.assignmentId;
+    const studentId = data.studentId;
+    return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', {text, assignmentId, studentId}, {headers: this.headers});
   }
 }

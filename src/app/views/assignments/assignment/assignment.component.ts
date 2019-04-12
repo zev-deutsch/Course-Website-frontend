@@ -47,12 +47,6 @@ export class AssignmentSubmissionDialogComponent implements OnInit {
 
   }
 
-  //   public dialogRef: MatDialogRef<AssignmentSubmissionDialogComponent>,
-  //   @Inject(MAT_DIALOG_DATA) public data: SubmitAssignment) {}
-  //
-  // cancelSubmission(): void {
-  //   this.dialogRef.close();
-  // }
 
   submitAssignment() {
     this.submit = new Submissions(this.githubRepo, this.id, this.id);
