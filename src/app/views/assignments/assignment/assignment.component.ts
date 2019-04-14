@@ -21,13 +21,8 @@ export class AssignmentComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AssignmentSubmissionDialogComponent);
-    console.log('The dialog was opened');
+    const dialogRef = this.dialog.open(AssignmentSubmissionDialogComponent, {data: this.assignment});
     Width:'200';
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   // submit form and do all necessary actions
-    // });
   }
 }
 
@@ -37,9 +32,12 @@ export class AssignmentComponent implements OnInit {
 })
 export class AssignmentSubmissionDialogComponent implements OnInit {
   githubRepo: string;
-  id = 1;
-  submit: Submissions;
-  constructor(private submitted: MatSnackBar, private dataService: DataService) {
+
+  constructor(
+    private submitted: MatSnackBar,
+    private dataService: DataService,
+    private authService: AuthService,
+    @Inject(MAT_DIALOG_DATA) public assignment: ViewAssignments) {
 
   }
 
@@ -49,9 +47,9 @@ export class AssignmentSubmissionDialogComponent implements OnInit {
 
 
   submitAssignment() {
-    this.submit = new Submissions(this.githubRepo, this.id, this.id);
-    console.log(this.submit);
-    this.dataService.submitAssignment(this.submit).subscribe(res => console.log(res));
+    const submit = new Submissions(this.authService.isLoggedIn.id, this.assignment.id, this.githubRepo);
+    console.log(submit);
+    this.dataService.submitAssignment(submit).subscribe(res => console.log(res));
     const submitDate = new Date();
     this.submitted.open('Assignment submitted!', submitDate.toDateString(), {
       duration: 2500,

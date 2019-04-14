@@ -5,18 +5,19 @@
   </mat-card-header>
   <div class="due-date">
   Due Date: {{assignment.releaseDate}}<br>
-  Release Date: {{assignment.dueDate}}
+  Release Date: {{assignment.dueDate}}<br>
   </div>
   <mat-card-content>
     <p class="body">
       {{assignment.body}}
     </p>
   </mat-card-content>
-  <span *ngIf="!assignment.grade && loggedIn == 'student'">
+  <span *ngIf="!assignment.grade && loggedIn == 'student' && !assignment.submittedDate">
   <mat-card-actions class="submit-button">
     <button mat-raised-button (click)="openDialog()">SUBMIT ASSIGNMENT</button>
   </mat-card-actions>
     </span>
+  <span *ngIf="assignment.submittedDate">Submitted Date: {{assignment.submittedDate}}</span>
   <span *ngIf="assignment.grade && loggedIn == 'student'" class="submit-button">
   Grade: {{assignment.grade}} Submit Date: {{assignment.submittedDate}}
     </span>

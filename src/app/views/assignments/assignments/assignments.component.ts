@@ -11,17 +11,16 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 })
 export class AssignmentsComponent implements OnInit {
   getAssignments: ViewAssignments[];
-  id = 1;
   private loggedIn: string;
   constructor(private dataService: DataService, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loggedIn = this.authService.loggedInOld();
-    this.getAssignment(this.id);
+    this.getAssignment(this.authService.isLoggedIn);
   }
 
-  getAssignment(id): void {
-    this.dataService.getAssignment(id).subscribe((res) => {
+  getAssignment(data): void {
+    this.dataService.getAssignment(data).subscribe((res) => {
       this.getAssignments = [];
       res.map((item) => {
         this.getAssignments.push(new ViewAssignments(item));

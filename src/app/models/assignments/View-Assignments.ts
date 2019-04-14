@@ -1,4 +1,5 @@
 export class ViewAssignments {
+  id: number;
   teacherName: string;
   dueDate: string;
   releaseDate: string;
@@ -8,6 +9,7 @@ export class ViewAssignments {
   submittedDate: string;
 
   constructor(args?) {
+    this.id = args.id;
     this.teacherName = args.name;
     this.dueDate = args.duedate;
     this.releaseDate = args.releasedate;

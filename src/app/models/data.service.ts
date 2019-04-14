@@ -6,7 +6,6 @@ import { GetAnnouncements } from './announcements/getAnnouncements';
 import {ViewAssignments} from './assignments/View-Assignments';
 import {Submissions} from './assignments/Submissions';
 import {LoggedInfo} from './users/LoggedInfo';
-import {User} from './users/user';
 import {AuthService} from './users/auth.service';
 
 @Injectable({
@@ -35,12 +34,13 @@ export class DataService {
     return this.http.get<GetAnnouncements[]>(this.baseUrl + 'initials/getAnnouncements');
   }
 
-  getAssignment(id: number): Observable<ViewAssignments[]> {
-    return this.http.get<ViewAssignments[]>(this.baseUrl + 'Students/listAssignments/', {headers: this.getHeaders()});
+  getAssignment(data: LoggedInfo): Observable<ViewAssignments[]> {
+    const params = `${data.accountType}_id=${data.id}`;
+    return this.http.post<ViewAssignments[]>(this.baseUrl + `${data.accountType}s/listAssignments/`, params, {headers: this.getHeaders()});
   }
 
   submitAssignment(data: Submissions): Observable<Submissions[]> {
-    const params = `text=${data.text}&studentId=${data.studentId}&assignmentId=${data.assignmentId}`;
+    const params = `studentid=${data.studentId}&assignmentid=${data.assignmentId}&text=${data.text}`;
     return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', params, {headers: this.getHeaders()});
   }
 
