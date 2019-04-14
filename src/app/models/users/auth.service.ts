@@ -12,17 +12,20 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class AuthService {
   isLoggedIn: LoggedInfo;
   baseUrl = 'http://localhost/backend/';
-  headers = new HttpHeaders({
-    'content-Type': 'application/x-www-form-urlencoded',
-    Authorization: (this.isLoggedIn ? this.isLoggedIn.token : '')
-  });
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  getHeaders() {
+    const emptyheaders = new HttpHeaders();
+    const contentType = emptyheaders.append('content-Type', 'application/x-www-form-urlencoded');
+    const authorization = contentType.append('Authorization', this.isLoggedIn ? this.isLoggedIn.token : '');
+    return authorization;
+  }
 
   // Makes connection to db and returns users info onsuccess or error
   public login(args: User): Observable<LoggedInfo> {
     const params = `id=${args.id}&password=${args.password}&accountType=${args.accountType}`;
-    return this.http.post<LoggedInfo>(this.baseUrl + 'initials/login', params, {headers: this.headers});
+    return this.http.post<LoggedInfo>(this.baseUrl + 'initials/login', params, {headers: this.getHeaders()});
   }
 
   public loggedIn(userInfo: LoggedInfo) {
@@ -32,8 +35,9 @@ export class AuthService {
   public logout() {
     console.log(this.isLoggedIn);
     if (this.isLoggedIn) {
-      return this.http.post<any>(this.baseUrl + 'initials/logout', {headers: this.headers});
+      this.http.post(this.baseUrl + 'initials/logout', '', {headers: this.getHeaders()}).subscribe();
     }
+    console.log(this.isLoggedIn);
     this.isLoggedIn = null;
   }
 

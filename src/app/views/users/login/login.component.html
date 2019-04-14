@@ -3,9 +3,8 @@
     <p style="color:red">{{msg}}</p>
     <div class="inner-box">
       <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <input type="hidden" value="student" required>
         <mat-form-field>
-          <input type="text" matInput placeholder="Student ID" formControlName="id" required>
+          <input type="text" matInput placeholder="Student / Teacher ID" formControlName="id" required>
         </mat-form-field>
         <div *ngIf="isSubmitted && formControls.id.errors" class="error-message">
           <div *ngIf="formControls.id.errors.required">ID is required</div>
