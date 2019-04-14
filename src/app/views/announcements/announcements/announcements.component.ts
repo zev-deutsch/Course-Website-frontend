@@ -33,7 +33,9 @@ export class AnnouncementsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddAnnouncementsDialogComponent);
+    const dialogRef = this.dialog.open(AddAnnouncementsDialogComponent,{
+      width: '500px'
+    });
   }
 
 }
@@ -41,6 +43,7 @@ export class AnnouncementsComponent implements OnInit {
 @Component({
   selector: 'app-announcement-add',
   templateUrl: 'announcement-add-dialog.html',
+  styleUrls: ['./announcement-add-dialog.scss']
 })
 export class AddAnnouncementsDialogComponent {
   announcement = new Announcement(1, '');
