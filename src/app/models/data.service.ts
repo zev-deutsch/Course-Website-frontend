@@ -16,16 +16,19 @@ export class DataService {
   baseUrl = 'http://localhost/backend/';
   announcements: GetAnnouncements[];
   submit: any;
-  headers = new HttpHeaders({
-    'content-Type': 'application/x-www-form-urlencoded',
-    Authorization: (this.authService.isLoggedIn ? this.authService.isLoggedIn.token : '')
-  });
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
+  getHeaders() {
+    const emptyheaders = new HttpHeaders();
+    const contentType = emptyheaders.append('content-Type', 'application/x-www-form-urlencoded');
+    const authorization = contentType.append('Authorization', this.authService.isLoggedIn ? this.authService.isLoggedIn.token : '');
+    return authorization;
+  }
+
   addAnnouncement(announcement: Announcement): Observable<Announcement[]> {
     const params = `teacherid=${announcement.teacherId}&body=${announcement.body}`;
-    return this.http.post<Announcement[]>(this.baseUrl + 'teachers/addAnnouncement', params, {headers: this.headers});
+    return this.http.post<Announcement[]>(this.baseUrl + 'teachers/addAnnouncement', params, {headers: this.getHeaders()});
   }
 
   getAnnouncements(): Observable<GetAnnouncements[]> {
@@ -33,12 +36,12 @@ export class DataService {
   }
 
   getAssignment(id: number): Observable<ViewAssignments[]> {
-    return this.http.get<ViewAssignments[]>(this.baseUrl + 'Students/listAssignments/' + id);
+    return this.http.get<ViewAssignments[]>(this.baseUrl + 'Students/listAssignments/', {headers: this.getHeaders()});
   }
 
   submitAssignment(data: Submissions): Observable<Submissions[]> {
     const params = `text=${data.text}&studentId=${data.studentId}&assignmentId=${data.assignmentId}`;
-    return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', params, {headers: this.headers});
+    return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', params, {headers: this.getHeaders()});
   }
 
 }
