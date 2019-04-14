@@ -23,15 +23,15 @@ export class LoginComponent implements OnInit {
   userObject: User;
   msg: string;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private dataService: DataService) { }
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    // this.loggedIn = this.authService.loggedIn();
+    // this.loggedInOld = this.authService.loggedInOld();
 
     this.loginForm = this.formBuilder.group({
       id: ['', Validators.required],
       password: ['', Validators.required],
-      accountType: 'student'
+      accountType: ['', Validators.required]
     });
   }
 
@@ -51,20 +51,18 @@ export class LoginComponent implements OnInit {
     console.log(this.userObject);
 
     // Process form
-    this.dataService.login(this.userObject).subscribe(
+    this.authService.login(this.userObject).subscribe(
       (res) => {
         if (res.error) {
           this.msg = res.error;
         } else {
-          this.authService.login(res);
+          this.authService.loggedIn(res);
+          console.log(res.accountType);
           this.router.navigateByUrl(res.accountType);
         }
       }
     );
 
-
-    // this.authService.login(this.loginForm.value);
-    // this.router.navigateByUrl('student');
   }
 
 }

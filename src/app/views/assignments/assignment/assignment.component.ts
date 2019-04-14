@@ -17,7 +17,7 @@ export class AssignmentComponent implements OnInit {
   constructor(public dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedIn();
+    this.loggedIn = this.authService.loggedInOld();
   }
 
   openDialog(): void {

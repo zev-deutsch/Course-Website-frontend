@@ -14,12 +14,12 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedIn();
+    this.loggedIn = this.authService.loggedInOld();
     console.log(this.loggedIn);
   }
 
   logout() {
     this.authService.logout();
-    // this.router.navigateByUrl('/login'); // TODO change
+    this.router.navigateByUrl('../');
   }
 }

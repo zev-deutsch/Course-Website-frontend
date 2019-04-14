@@ -16,7 +16,7 @@ export class AssignmentsComponent implements OnInit {
   constructor(private dataService: DataService, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedIn();
+    this.loggedIn = this.authService.loggedInOld();
     this.getAssignment(this.id);
   }
 

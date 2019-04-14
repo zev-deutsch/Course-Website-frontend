@@ -11,7 +11,7 @@ import {
   MatCardModule,
   MatDialogModule,
   MatIconModule,
-  MatInputModule, MatNativeDateModule, MatSnackBarModule,
+  MatInputModule, MatNativeDateModule, MatSelectModule, MatSnackBarModule,
   MatTabsModule
 } from '@angular/material';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -72,6 +72,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSelectModule,
 
   ],
   providers: [],
