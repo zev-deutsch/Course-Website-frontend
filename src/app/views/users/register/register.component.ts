@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedIn();
+    this.loggedIn = this.authService.loggedInOld();
   }
 
 }

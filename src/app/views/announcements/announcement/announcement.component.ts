@@ -16,7 +16,7 @@ export class AnnouncementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedIn();
+    this.loggedIn = this.authService.loggedInOld();
   }
 
 // TODO bounes mark as read function

@@ -7,6 +7,7 @@ import {ViewAssignments} from './assignments/View-Assignments';
 import {Submissions} from './assignments/Submissions';
 import {LoggedInfo} from './users/LoggedInfo';
 import {User} from './users/user';
+import {AuthService} from './users/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,11 @@ export class DataService {
   announcements: GetAnnouncements[];
   submit: any;
   headers = new HttpHeaders({
-    'content-Type': 'application/x-www-form-urlencoded'
+    'content-Type': 'application/x-www-form-urlencoded',
+    Authorization: (this.authService.isLoggedIn ? this.authService.isLoggedIn.token : '')
   });
-  
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   addAnnouncement(announcement: Announcement): Observable<Announcement[]> {
     const params = `teacherid=${announcement.teacherId}&body=${announcement.body}`;
@@ -39,14 +41,4 @@ export class DataService {
     return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', params, {headers: this.headers});
   }
 
-  login(args: User): Observable<LoggedInfo> {
-    const params = `id=${args.id}&password=${args.password}`;
-    return this.http.post<LoggedInfo>(this.baseUrl + 'students/login', params, {headers: this.headers});
-  }
-
-  logout(accountType, token): Observable<any>{
-    console.log(token);
-    const params = `token=${token}`;
-    return this.http.post<any>(this.baseUrl + accountType + 's/logout', params, {headers: this.headers});
-  }
 }
