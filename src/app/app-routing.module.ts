@@ -8,6 +8,8 @@ import {AnnouncementsComponent} from './views/announcements/announcements/announ
 import {AssignmentComponent} from './views/assignments/assignment/assignment.component';
 import {NavbarComponent} from './views/navbar/navbar.component';
 import {AnnouncementComponent} from './views/announcements/announcement/announcement.component';
+import {StudentAuthGuard} from "./controllers/student-auth.guard";
+import {TeacherAuthGuard} from "./controllers/teacher-auth.guard";
 
 const routes: Routes = [
   {path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -24,7 +26,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'student', component: NavbarComponent, children: [
+    path: 'student', component: NavbarComponent, canActivate: [StudentAuthGuard], canActivateChild: [StudentAuthGuard], children: [
       { path: '', pathMatch: 'full', redirectTo: 'announcements'},
       { path: 'announcements', component: AnnouncementsComponent},
       { path: 'assignments', component: AssignmentsComponent },
@@ -33,7 +35,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'teacher', component: NavbarComponent, children: [
+    path: 'teacher', component: NavbarComponent, canActivate: [TeacherAuthGuard], canActivateChild: [TeacherAuthGuard], children: [
       { path: '', pathMatch: 'full', redirectTo: 'announcements'},
       { path: 'announcements', component: AnnouncementsComponent},
       { path: 'assignments', component: AssignmentsComponent },

@@ -37,11 +37,11 @@ export class AuthService {
     if (this.isLoggedIn) {
       this.http.post(this.baseUrl + 'initials/logout', '', {headers: this.getHeaders()}).subscribe();
     }
-    console.log(this.isLoggedIn);
+    this.router.navigateByUrl('../');
     this.isLoggedIn = null;
   }
 
-  public loggedInOld(){
+  public loggedInOld() {
     const parent = this.router.url.split('/');
     return parent[1];
   }

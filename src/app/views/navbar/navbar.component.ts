@@ -9,13 +9,10 @@ import { Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  loggedIn: string;
-
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedInOld();
-    console.log(this.loggedIn);
+    console.log(this.authService.isLoggedIn);
   }
 
   logout() {
