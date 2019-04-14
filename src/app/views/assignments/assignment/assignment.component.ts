@@ -23,7 +23,7 @@ export class AssignmentComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AssignmentSubmissionDialogComponent);
     console.log('The dialog was opened');
-
+    Width:'200';
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed');
     //   // submit form and do all necessary actions
