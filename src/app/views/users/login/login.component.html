@@ -15,13 +15,17 @@
         <div *ngIf="isSubmitted && formControls.password.errors" class="error-message">
           <div *ngIf="formControls.password.errors.required">Password is required</div>
         </div>
-        <mat-form-field>
-          <mat-label>Account Type</mat-label>
-          <mat-select formControlName="accountType" required>
-            <mat-option value="student">Student</mat-option>
-            <mat-option value="teacher">Teacher</mat-option>
-          </mat-select>
-        </mat-form-field>
+<!--        <mat-form-field>-->
+<!--          <mat-label>Account Type</mat-label>-->
+<!--          <mat-select formControlName="accountType" required>-->
+<!--            <mat-option value="student">Student</mat-option>-->
+<!--            <mat-option value="teacher">Teacher</mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
+        <mat-radio-group formControlName="accountType" required>
+          <mat-radio-button value="student" color="primary">Student</mat-radio-button>
+          <mat-radio-button value="teacher" color="primary">Teacher</mat-radio-button>
+        </mat-radio-group>
         <div *ngIf="isSubmitted && formControls.accountType.errors" class="error-message">
           <div *ngIf="formControls.accountType.errors.required">Please select your account type</div>
         </div>

@@ -14,12 +14,9 @@ export class AnnouncementsComponent implements OnInit {
   addannouncement: Announcement[];
   getannouncements: GetAnnouncements[];
 
-  private loggedIn: string;
-
   constructor(private dataService: DataService, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedInOld();
     this.getAnnouncements();
   }
 

@@ -10,17 +10,17 @@ import {AuthService} from '../../../models/users/auth.service';
 })
 export class AnnouncementComponent implements OnInit {
   @Input() announcement: GetAnnouncements;
-  private loggedIn: string;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private dataService: DataService) {
   }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedInOld();
+
   }
 
-// TODO bounes mark as read function
+// TODO bonues mark as read function
   markRead() {
+    this.dataService.announcementRead(this.authService.isLoggedIn.id, this.announcement.announcementId).subscribe();
 
   }
 }

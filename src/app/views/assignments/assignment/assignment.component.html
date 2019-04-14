@@ -1,24 +1,24 @@
-<mat-card class="main">
-  <mat-card-header class="head">
-    <mat-card-title>{{assignment.subject}}</mat-card-title>
-    <mat-card-subtitle>Teacher: {{assignment.teacherName}}</mat-card-subtitle>
-  </mat-card-header>
-  <div class="due-date">
-  Due Date: {{assignment.releaseDate}}<br>
-  Release Date: {{assignment.dueDate}}<br>
-  </div>
-  <mat-card-content>
-    <p class="body">
-      {{assignment.body}}
-    </p>
-  </mat-card-content>
-  <span *ngIf="!assignment.grade && loggedIn == 'student' && !assignment.submittedDate">
-  <mat-card-actions class="submit-button">
-    <button mat-raised-button (click)="openDialog()">SUBMIT ASSIGNMENT</button>
-  </mat-card-actions>
-    </span>
-  <span *ngIf="assignment.submittedDate">Submitted Date: {{assignment.submittedDate}}</span>
-  <span *ngIf="assignment.grade && loggedIn == 'student'" class="submit-button">
-  Grade: {{assignment.grade}} Submit Date: {{assignment.submittedDate}}
-    </span>
-</mat-card>
+<div *ngIf="authService.isLoggedIn.accountType == 'student'">
+  <mat-card class="main">
+    <mat-card-header class="head">
+      <mat-card-title>{{assignment.subject}}</mat-card-title>
+      <mat-card-subtitle>Teacher: {{assignment.teacherName}}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="due-date">
+    Due Date: {{assignment.releaseDate}}<br>
+    Release Date: {{assignment.dueDate}}<br>
+    </div>
+    <mat-card-content>
+      <p class="body">
+        {{assignment.body}}
+      </p>
+    </mat-card-content>
+    <span *ngIf="!assignment.grade && !assignment.submittedDate">
+    <mat-card-actions class="ml-16">
+      <button mat-raised-button (click)="openDialog()">SUBMIT ASSIGNMENT</button>
+    </mat-card-actions>
+      </span>
+    <span *ngIf="assignment.submittedDate" class="ml-16">Submit Date: {{assignment.submittedDate}}<br></span>
+    <span *ngIf="assignment.grade" class="ml-16">Grade: {{assignment.grade}}</span>
+  </mat-card>
+</div>

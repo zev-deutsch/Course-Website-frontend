@@ -44,4 +44,8 @@ export class DataService {
     return this.http.post<Submissions[]>(this.baseUrl + 'Students/addSubmission', params, {headers: this.getHeaders()});
   }
 
+  announcementRead(studentId: number, announcementId: number) {
+    const params = `studentid=${studentId}&announcementid=${announcementId}`;
+    return this.http.post<any>(this.baseUrl + 'Students/addAnnouncementRead', params, {headers: this.getHeaders()});
+  }
 }

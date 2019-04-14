@@ -13,11 +13,10 @@ import {Submissions} from '../../../models/assignments/Submissions';
 })
 export class AssignmentComponent implements OnInit {
   @Input() assignment: ViewAssignments;
-  private loggedIn: string;
   constructor(public dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedInOld();
+
   }
 
   openDialog(): void {

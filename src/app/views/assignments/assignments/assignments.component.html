@@ -4,8 +4,8 @@
 <!--  <mat-tab label="Current "> <app-assignment></app-assignment> </mat-tab>-->
 <!--  <mat-tab label="Passed"> <app-assignment></app-assignment> </mat-tab>-->
 <!--</mat-tab-group>-->
-<div *ngIf="loggedIn == 'teacher'" class="addbutton">
-<button mat-raised-button (click)="openDialog()" >ADD ASSIGNMENT</button>
+<div *ngIf="authService.isLoggedIn.accountType == 'teacher'" class="addbutton">
+<button mat-raised-button (click)="openDialog()">ADD NEW ASSIGNMENT</button>
 </div>
 <div *ngFor="let assignment of getAssignments">
   <app-assignment [assignment]="assignment"></app-assignment>
