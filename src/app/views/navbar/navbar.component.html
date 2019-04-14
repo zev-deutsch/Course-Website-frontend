@@ -6,7 +6,7 @@
                [opened]="true">
     <mat-toolbar class="app-name" routerLink="">Omnivox</mat-toolbar>
     <mat-nav-list>
-      <span *ngIf="loggedIn == 'main'">
+      <span *ngIf="!authService.isLoggedIn">
         <a mat-list-item routerLink="announcements">Announcements</a>
         <a mat-list-item routerLink="register">Register</a>
         <a mat-list-item routerLink="login">Login</a>
