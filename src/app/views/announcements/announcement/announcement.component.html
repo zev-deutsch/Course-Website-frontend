@@ -8,6 +8,7 @@
     <p class="body">
       {{announcement.body}}
     </p>
+<!--    TODO remove button if student already marked this announcement as read-->
   </mat-card-content>
   <mat-card-actions *ngIf="authService.isLoggedIn && authService.isLoggedIn.accountType == 'student'" class="submit-button">
     <button mat-raised-button (click)="markRead()">MARK AS READ</button>

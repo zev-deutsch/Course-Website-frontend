@@ -8,8 +8,8 @@
     <mat-nav-list>
       <span *ngIf="!authService.isLoggedIn">
         <a mat-list-item routerLink="announcements">Announcements</a>
-        <a mat-list-item routerLink="register">Register</a>
         <a mat-list-item routerLink="login">Login</a>
+        <a mat-list-item routerLink="register">Register</a>
       </span>
       <span *ngIf="authService.isLoggedIn">
         <p class="t-s-name">Welcome {{authService.isLoggedIn.name}}</p>

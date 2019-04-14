@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../models/data.service';
 import {GetAnnouncements} from '../../../models/announcements/getAnnouncements';
 import {AuthService} from '../../../models/users/auth.service';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 
@@ -33,7 +33,11 @@ export class AnnouncementsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddAnnouncementsDialogComponent,{
       width: '500px'
     });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getAnnouncements();
+    });
   }
+
 }
 
 @Component({
@@ -46,7 +50,12 @@ export class AddAnnouncementsDialogComponent implements OnInit {
   newAnnouncement: FormGroup;
   isSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private dataService: DataService, private snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private dataService: DataService,
+              private snackBar: MatSnackBar,
+              public dialogRef: MatDialogRef<AnnouncementsComponent>
+  ) { }
 
   ngOnInit() {
 
@@ -67,9 +76,10 @@ export class AddAnnouncementsDialogComponent implements OnInit {
     if (this.newAnnouncement.invalid) {
       return;
     }
-    console.log(this.newAnnouncement.value.body);
 
     this.dataService.addAnnouncement(this.authService.isLoggedIn.id, this.newAnnouncement.value.body).subscribe(res => console.log(res));
+
+    this.dialogRef.close();
 
     this.snackBar.open('Announcement added!', '', {
       duration: 2500,

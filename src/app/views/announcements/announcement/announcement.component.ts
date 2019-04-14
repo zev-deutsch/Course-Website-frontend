@@ -15,13 +15,17 @@ export class AnnouncementComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.checkIfRead();
   }
 
-// TODO bonues mark as read function
   markRead() {
     this.dataService.announcementRead(this.authService.isLoggedIn.id, this.announcement.announcementId).subscribe();
 
+  }
+
+  private checkIfRead() {
+    // TODO make a call to check if announcement was read by current student
+    // TODO make a call to list all students who have read this announcement
   }
 }
 

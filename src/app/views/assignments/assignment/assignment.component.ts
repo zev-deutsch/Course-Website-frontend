@@ -21,7 +21,6 @@ export class AssignmentComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AssignmentSubmissionDialogComponent, {data: this.assignment});
-    Width:'200';
   }
 }
 
