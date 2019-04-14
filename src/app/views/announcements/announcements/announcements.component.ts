@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Announcement} from '../../../models/announcements/Announcement';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../models/data.service';
 import {GetAnnouncements} from '../../../models/announcements/getAnnouncements';
 import {AuthService} from '../../../models/users/auth.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-announcements',
@@ -11,7 +12,6 @@ import {MatDialog, MatSnackBar} from '@angular/material';
   styleUrls: ['./announcements.component.scss']
 })
 export class AnnouncementsComponent implements OnInit {
-  addannouncement: Announcement[];
   getannouncements: GetAnnouncements[];
 
   private loggedIn: string;
@@ -37,7 +37,6 @@ export class AnnouncementsComponent implements OnInit {
       width: '500px'
     });
   }
-
 }
 
 @Component({
@@ -45,15 +44,37 @@ export class AnnouncementsComponent implements OnInit {
   templateUrl: 'announcement-add-dialog.html',
   styleUrls: ['./announcement-add-dialog.scss']
 })
-export class AddAnnouncementsDialogComponent {
-  announcement = new Announcement(1, '');
-  constructor(private submitted: MatSnackBar, private dataService: DataService) {
+export class AddAnnouncementsDialogComponent implements OnInit {
 
+  newAnnouncement: FormGroup;
+  isSubmitted = false;
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private dataService: DataService, private snackBar: MatSnackBar) { }
+
+  ngOnInit() {
+
+    this.newAnnouncement = this.formBuilder.group({
+      body: ['', Validators.required]
+    });
   }
 
+  get formControls() { return this.newAnnouncement.controls; }
+
+
   addAnnouncement() {
-    this.dataService.addAnnouncement(this.announcement).subscribe(res => console.log(res));
-    this.submitted.open('Announcement added!', '', {
+
+    // Set isSubmitted to true
+    this.isSubmitted = true;
+
+    // If there are errors don't continue to process form
+    if (this.newAnnouncement.invalid) {
+      return;
+    }
+    console.log(this.newAnnouncement.value.body);
+
+    this.dataService.addAnnouncement(this.authService.isLoggedIn.id, this.newAnnouncement.value.body).subscribe(res => console.log(res));
+
+    this.snackBar.open('Announcement added!', '', {
       duration: 2500,
     });
   }
