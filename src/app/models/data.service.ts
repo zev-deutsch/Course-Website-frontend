@@ -25,8 +25,8 @@ export class DataService {
     return authorization;
   }
 
-  addAnnouncement(announcement: Announcement): Observable<Announcement[]> {
-    const params = `teacherid=${announcement.teacherId}&body=${announcement.body}`;
+  addAnnouncement(teacherId: number, body: string): Observable<Announcement[]> {
+    const params = `teacherid=${teacherId}&body=${body}`;
     return this.http.post<Announcement[]>(this.baseUrl + 'teachers/addAnnouncement', params, {headers: this.getHeaders()});
   }
 
