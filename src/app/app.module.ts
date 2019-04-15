@@ -9,7 +9,7 @@ import { LoginComponent} from './views/users/login/login.component';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDialogModule,
+  MatDialogModule, MatExpansionModule,
   MatIconModule,
   MatInputModule, MatNativeDateModule, MatSelectModule, MatSnackBarModule,
   MatTabsModule
@@ -73,6 +73,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatExpansionModule,
 
   ],
   providers: [],

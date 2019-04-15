@@ -4,7 +4,6 @@ import {GetAnnouncements} from '../../../models/announcements/getAnnouncements';
 import {AuthService} from '../../../models/users/auth.service';
 import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-announcements',
@@ -89,4 +88,5 @@ export class AddAnnouncementsDialogComponent implements OnInit {
       duration: 2500,
     });
   }
+
 }

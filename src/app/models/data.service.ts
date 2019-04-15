@@ -53,4 +53,14 @@ export class DataService {
     const params = `teacherId=${data.teacherId}&subject=${data.subject}&releaseDate=${data.releaseDate}&dueDate=${data.dueDate}&body=${data.body}`;
     return this.http.post<any>(this.baseUrl + 'teachers/addAssignment', params, {headers: this.getHeaders()});
   }
+
+  updateAnnouncement( id: number, teacherId: number, body: string): Observable<boolean> {
+    const params = `id=${id}&teacherid=${teacherId}&body=${body}`;
+    return this.http.post<any>(this.baseUrl + 'teachers/updateAnnouncement', params, {headers: this.getHeaders()});
+  }
+
+  deleteAnnouncement(id: number): Observable<boolean> {
+    const params = `id=${id}`;
+    return this.http.post<any>(this.baseUrl + 'teachers/deleteAnnouncement', params, {headers: this.getHeaders()});
+  }
 }

@@ -10,7 +10,26 @@
     </p>
 <!--    TODO remove button if student already marked this announcement as read-->
   </mat-card-content>
-  <mat-card-actions *ngIf="authService.isLoggedIn && authService.isLoggedIn.accountType == 'student'" class="submit-button">
+
+<!--  mark as read button for students-->
+  <mat-card-actions *ngIf="authService.isLoggedIn && authService.isLoggedIn.accountType == 'student'" class="bottom-button">
     <button mat-raised-button (click)="markRead()">MARK AS READ</button>
   </mat-card-actions>
+
+<!--  edit announcement for teachers-->
+  <mat-card-actions *ngIf="authService.isLoggedIn && authService.isLoggedIn.accountType == 'teacher'" class="bottom-button">
+
+      <mat-expansion-panel class="expansion" [expanded]="panelOpenState" (afterExpand)="panelOpenState = true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>EDIT / DELETE</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <textarea matInput #textbox> {{announcement.body}}</textarea>
+        </mat-form-field>
+        <button type="submit" style="width: 95%;" mat-raised-button (click)="updateAnnouncement(textbox.value)">Submit</button>
+      </mat-expansion-panel>
+
+  </mat-card-actions>
+
 </mat-card>
