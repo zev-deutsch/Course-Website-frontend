@@ -22,3 +22,23 @@
     <span *ngIf="assignment.grade" class="ml-16">Grade: {{assignment.grade}}</span>
   </mat-card>
 </div>
+
+<div *ngIf="authService.isLoggedIn.accountType == 'teacher'">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{assignment.subject}}
+        </mat-panel-title>
+        <mat-panel-title>
+          Due Date: {{assignment.releaseDate}}<br>
+          Release Date: {{assignment.dueDate}}<br>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{assignment.body}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-submitions [assignementId]="assignment.id"></app-submitions>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

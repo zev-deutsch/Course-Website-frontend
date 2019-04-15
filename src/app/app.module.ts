@@ -33,6 +33,8 @@ import {
 import {AddAssignmentDialogComponent, AssignmentsComponent} from './views/assignments/assignments/assignments.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { SubmitionsComponent } from './views/submitions/submitions.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AssignmentsComponent,
     AssignmentSubmissionDialogComponent,
     AddAnnouncementsDialogComponent,
-    AddAssignmentDialogComponent
+    AddAssignmentDialogComponent,
+    SubmitionsComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatNativeDateModule,
     MatSelectModule,
     MatExpansionModule,
+    MatTableModule
 
   ],
   providers: [],

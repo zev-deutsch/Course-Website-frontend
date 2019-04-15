@@ -6,7 +6,7 @@ export class User {
 
   constructor(args?){
     // this.accountType = args.accountType;
-    this.id = args.id;
+    this.id = args.stID;
     this.password = args.password;
     this.accountType = args.accountType;
   }

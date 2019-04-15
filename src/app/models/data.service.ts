@@ -7,7 +7,8 @@ import {ViewAssignments} from './assignments/View-Assignments';
 import {Submissions} from './assignments/Submissions';
 import {LoggedInfo} from './users/LoggedInfo';
 import {AuthService} from './users/auth.service';
-import {Assignment} from "./assignments/Assignment";
+import {Assignment} from './assignments/Assignment';
+import {ViewSubmissions} from './assignments/View-Submissions';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ export class DataService {
     const params = `studentid=${studentId}&announcementid=${announcementId}`;
     return this.http.post<any>(this.baseUrl + 'Students/addAnnouncementRead', params, {headers: this.getHeaders()});
   }
-
+  
   addAssignment(data: Assignment): Observable<boolean> {
     const params = `teacherId=${data.teacherId}&subject=${data.subject}&releaseDate=${data.releaseDate}&dueDate=${data.dueDate}&body=${data.body}`;
     return this.http.post<any>(this.baseUrl + 'teachers/addAssignment', params, {headers: this.getHeaders()});
@@ -62,5 +63,10 @@ export class DataService {
   deleteAnnouncement(id: number): Observable<boolean> {
     const params = `id=${id}`;
     return this.http.post<any>(this.baseUrl + 'teachers/deleteAnnouncement', params, {headers: this.getHeaders()});
+  }
+
+  getSubmitions(asignementId: number): Observable<ViewSubmissions[]> {
+    const params = `assignment_id=${asignementId}`;
+    return this.http.post<ViewSubmissions[]>(this.baseUrl + 'Teachers/listSubmissions', params, {headers: this.getHeaders()});
   }
 }

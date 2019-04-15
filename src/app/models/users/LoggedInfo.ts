@@ -8,7 +8,7 @@ export  class LoggedInfo {
   constructor(args?) {
     this.token = args.token;
     this.accountType = args.accountType;
-    this.id = args.id;
+    this.id = args.stID;
     this.name = args.name;
     this.error = args.error;
   }

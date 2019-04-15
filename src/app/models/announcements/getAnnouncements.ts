@@ -8,6 +8,6 @@ export class GetAnnouncements {
     this.teacherName = args.name;
     this.date = args.date;
     this.body = args.body;
-    this.announcementId = args.id;
+    this.announcementId = args.stID;
   }
 }
