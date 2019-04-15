@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../../models/data.service';
 import {ViewAssignments} from '../../../models/assignments/View-Assignments';
 import {AuthService} from '../../../models/users/auth.service';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Assignment} from '../../../models/assignments/Assignment';
+import {User} from "../../../models/users/user";
 
 @Component({
   selector: 'app-assignments',
@@ -39,18 +42,65 @@ export class AssignmentsComponent implements OnInit {
   styleUrls: ['./assignment-add-dialog.scss']
 
 })
-export class AddAssignmentDialogComponent {
+export class AddAssignmentDialogComponent implements OnInit {
 
-  constructor(private submitted: MatSnackBar) {
+  newAssignment: FormGroup;
+  isSubmitted = false;
+  newAssignmentObject: Assignment;
+  datesConflict: boolean = false;
 
-  }
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private dataService: DataService,
+              private snackBar: MatSnackBar,
+              public dialogRef: MatDialogRef<AssignmentsComponent>
+  ) { }
 
-  addAssignment() {
-    const submitDate = new Date();
-    this.submitted.open('Assignment added!', submitDate.toDateString(), {
-      duration: 2500,
+  ngOnInit() {
+
+    this.newAssignment = this.formBuilder.group({
+      subject: ['', Validators.required],
+      releaseDate: [new Date(), Validators.required],
+      dueDate: ['', Validators.required],
+      body: ['', Validators.required]
     });
   }
 
+  get formControls() { return this.newAssignment.controls; }
 
+  addAssignment() {
+
+    // Set isSubmitted to true
+    this.isSubmitted = true;
+
+    // Check if dates are valid
+    if (Number(this.newAssignment.value.releaseDate) >= Number(this.newAssignment.value.dueDate)) {
+      this.datesConflict = true;
+      return;
+    }
+
+    // If there are errors don't continue to process form
+    if (this.newAssignment.invalid) {
+      return;
+    }
+
+    // If valid, create object of all entries
+    this.newAssignmentObject = new Assignment(
+      this.authService.isLoggedIn.id,
+      this.newAssignment.value.subject,
+      Number(this.newAssignment.value.releaseDate), // Date = current unix timestamp
+      Number(this.newAssignment.value.dueDate),
+      this.newAssignment.value.body)
+
+    // If valid send new assignment to database
+    this.dataService.addAssignment(this.newAssignmentObject).subscribe(res => console.log(res));
+
+    // Close dialog
+    this.dialogRef.close();
+
+    // Snackbar message
+    this.snackBar.open('Assignment added!', '', {
+      duration: 2500,
+    });
+  }
 }

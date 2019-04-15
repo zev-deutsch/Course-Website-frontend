@@ -34,6 +34,7 @@ export class AnnouncementsComponent implements OnInit {
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(() => {
+      // update page to include new announcement
       this.getAnnouncements();
     });
   }
@@ -77,10 +78,13 @@ export class AddAnnouncementsDialogComponent implements OnInit {
       return;
     }
 
+    // If valid send new announcement to database
     this.dataService.addAnnouncement(this.authService.isLoggedIn.id, this.newAnnouncement.value.body).subscribe(res => console.log(res));
 
+    // Close dialog
     this.dialogRef.close();
 
+    // Snackbar message
     this.snackBar.open('Announcement added!', '', {
       duration: 2500,
     });

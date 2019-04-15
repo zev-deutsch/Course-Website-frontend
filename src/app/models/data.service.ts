@@ -7,6 +7,7 @@ import {ViewAssignments} from './assignments/View-Assignments';
 import {Submissions} from './assignments/Submissions';
 import {LoggedInfo} from './users/LoggedInfo';
 import {AuthService} from './users/auth.service';
+import {Assignment} from "./assignments/Assignment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,6 @@ import {AuthService} from './users/auth.service';
 export class DataService {
   baseUrl = 'http://localhost/backend/';
   announcements: GetAnnouncements[];
-  submit: any;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -47,5 +47,10 @@ export class DataService {
   announcementRead(studentId: number, announcementId: number) {
     const params = `studentid=${studentId}&announcementid=${announcementId}`;
     return this.http.post<any>(this.baseUrl + 'Students/addAnnouncementRead', params, {headers: this.getHeaders()});
+  }
+
+  addAssignment(data: Assignment): Observable<boolean> {
+    const params = `teacherId=${data.teacherId}&subject=${data.subject}&releaseDate=${data.releaseDate}&dueDate=${data.dueDate}&body=${data.body}`;
+    return this.http.post<any>(this.baseUrl + 'teachers/addAssignment', params, {headers: this.getHeaders()});
   }
 }

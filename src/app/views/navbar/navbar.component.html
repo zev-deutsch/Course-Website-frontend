@@ -4,7 +4,7 @@
                [attr.role]="'navigation'"
                [mode]="'side'"
                [opened]="true">
-    <mat-toolbar class="app-name" routerLink="">Omnivox</mat-toolbar>
+    <mat-toolbar class="app-name" routerLink="./">Omnivox</mat-toolbar>
     <mat-nav-list>
       <span *ngIf="!authService.isLoggedIn">
         <a mat-list-item routerLink="announcements">Announcements</a>
