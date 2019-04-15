@@ -9,7 +9,7 @@ export class ViewAssignments {
   submittedDate: string;
 
   constructor(args?) {
-    this.id = args.stID;
+    this.id = args.id;
     this.teacherName = args.name;
     this.dueDate = args.duedate;
     this.releaseDate = args.releasedate;

@@ -3,12 +3,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
 import { User} from '../../../models/users/user';
 import {AuthService} from '../../../models/users/auth.service';
-import {element} from "protractor";
-import {getValue} from "@angular/core/src/render3/styling/class_and_style_bindings";
-import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
-import {visitValue} from "@angular/compiler/src/util";
-import {DataService} from '../../../models/data.service';
-import {LoggedInfo} from '../../../models/users/LoggedInfo';
 
 @Component({
   selector: 'app-login',
@@ -19,14 +13,12 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isSubmitted = false;
-  loggedIn: string;
   userObject: User;
   msg: string;
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    // this.loggedInOld = this.authService.loggedInOld();
 
     this.loginForm = this.formBuilder.group({
       id: ['', Validators.required],

@@ -2,7 +2,7 @@ export class ViewSubmissions {
   assignmentid: number;
   datesubmitted: string;
   grade: number;
-  stID: number;
+  id: number;
   name: string;
   studentid: number;
   text: string;
@@ -10,7 +10,7 @@ export class ViewSubmissions {
   this.assignmentid = args.assignmentid;
   this.datesubmitted = args.datesubmitted;
   this.grade = (args.grade) ? args.grade : null;
-  this.stID = args.stID;
+  this.id = args.stID;
   this.name = args.name;
   this.studentid = args.studentid;
   this.text = args.text;

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
 import {LoggedInfo} from './LoggedInfo';
-import {User} from "./user";
-import {Observable} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {User} from './user';
+import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -39,10 +39,5 @@ export class AuthService {
     }
     this.router.navigateByUrl('../');
     this.isLoggedIn = null;
-  }
-
-  public loggedInOld() {
-    const parent = this.router.url.split('/');
-    return parent[1];
   }
 }
