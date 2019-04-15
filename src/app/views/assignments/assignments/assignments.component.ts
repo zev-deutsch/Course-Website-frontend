@@ -88,8 +88,8 @@ export class AddAssignmentDialogComponent implements OnInit {
     this.newAssignmentObject = new Assignment(
       this.authService.isLoggedIn.id,
       this.newAssignment.value.subject,
-      Number(this.newAssignment.value.releaseDate), // Date = current unix timestamp
-      Number(this.newAssignment.value.dueDate),
+      String(Number(this.newAssignment.value.releaseDate)).substr(0, 10), // Date = current unix timestamp
+        String(Number(this.newAssignment.value.dueDate)).substr(0, 10),
       this.newAssignment.value.body)
 
     // If valid send new assignment to database
