@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   get formControls() { return this.loginForm.controls; }
 
-  login() {
+  submitLogin() {
 
     // Set isSubmitted to true
     this.isSubmitted = true;
@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     // Process form
     this.authService.login(this.userObject).subscribe(
       (res) => {
+        console.log(res);
         if (res.error) {
           this.msg = res.error;
         } else {

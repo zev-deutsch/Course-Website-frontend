@@ -65,8 +65,18 @@ export class DataService {
     return this.http.post<any>(this.baseUrl + 'teachers/deleteAnnouncement', params, {headers: this.getHeaders()});
   }
 
-  getSubmitions(asignementId: number): Observable<ViewSubmissions[]> {
+  getSubmissions(asignementId: number): Observable<ViewSubmissions[]> {
     const params = `assignment_id=${asignementId}`;
     return this.http.post<ViewSubmissions[]>(this.baseUrl + 'Teachers/listSubmissions', params, {headers: this.getHeaders()});
+  }
+
+  updateSubmission( studentid: number, assignmentid: number, grade: number): Observable<boolean> {
+    const params = `studentid=${studentid}&assignmentid=${assignmentid}&grade=${grade}`;
+    return this.http.post<any>(this.baseUrl + 'teachers/updateSubmission', params, {headers: this.getHeaders()});
+  }
+
+  register(accountType: 'teacher' | 'student', name: string, password: string): Observable<any> {
+    const params = `accountType=${accountType}&name=${name}&password=${password}`;
+    return this.http.post<any>(this.baseUrl + 'Initials/register', params, {headers: this.getHeaders()});
   }
 }

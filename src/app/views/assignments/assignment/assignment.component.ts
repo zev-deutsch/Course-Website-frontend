@@ -1,8 +1,7 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {ViewAssignments} from '../../../models/assignments/View-Assignments';
 import {AuthService} from '../../../models/users/auth.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DataService} from '../../../models/data.service';
 import {Submissions} from '../../../models/assignments/Submissions';
 
@@ -13,6 +12,10 @@ import {Submissions} from '../../../models/assignments/Submissions';
 })
 export class AssignmentComponent implements OnInit {
   @Input() assignment: ViewAssignments;
+  @Input() submittable;
+  @Input() isOverdue = false;
+  @Output() updateChanges: EventEmitter<any> = new EventEmitter();
+
   constructor(public dialog: MatDialog, private authService: AuthService) {}
 
   ngOnInit() {
@@ -21,6 +24,10 @@ export class AssignmentComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AssignmentSubmissionDialogComponent, {data: this.assignment});
+    dialogRef.afterClosed().subscribe(() => {
+      // update page to include new submission
+      this.updateChanges.emit();
+    });
   }
 }
 
@@ -29,7 +36,7 @@ export class AssignmentComponent implements OnInit {
   templateUrl: 'assignment-submission-dialog.html',
 })
 export class AssignmentSubmissionDialogComponent implements OnInit {
-  githubRepo: string;
+  submissionBody: string;
 
   constructor(
     private submitted: MatSnackBar,
@@ -45,9 +52,11 @@ export class AssignmentSubmissionDialogComponent implements OnInit {
 
 
   submitAssignment() {
-    const submit = new Submissions(this.authService.isLoggedIn.id, this.assignment.id, this.githubRepo);
-    console.log(submit);
-    this.dataService.submitAssignment(submit).subscribe(res => console.log(res));
+    if (!this.submissionBody){
+      return;
+    }
+    const submit = new Submissions(this.authService.isLoggedIn.id, this.assignment.id, this.submissionBody);
+    this.dataService.submitAssignment(submit).subscribe();
     const submitDate = new Date();
     this.submitted.open('Assignment submitted!', submitDate.toDateString(), {
       duration: 2500,

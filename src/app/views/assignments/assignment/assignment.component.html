@@ -1,3 +1,5 @@
+
+<!--Students view of assignment-->
 <div *ngIf="authService.isLoggedIn.accountType == 'student'">
   <mat-card class="main">
     <mat-card-header class="head">
@@ -5,24 +7,27 @@
       <mat-card-subtitle>Teacher: {{assignment.teacherName}}</mat-card-subtitle>
     </mat-card-header>
     <div class="due-date">
-    Due Date: {{assignment.releaseDate}}<br>
     Release Date: {{assignment.dueDate}}<br>
+      <span  [ngClass]="{'red': isOverdue}">
+        Due Date: {{assignment.releaseDate}}<br>
+      </span>
     </div>
     <mat-card-content>
       <p class="body">
         {{assignment.body}}
       </p>
     </mat-card-content>
-    <span *ngIf="!assignment.grade && !assignment.submittedDate">
+    <span *ngIf="!assignment.grade && !assignment.submittedDate && submittable">
     <mat-card-actions class="ml-16">
       <button mat-raised-button (click)="openDialog()">SUBMIT ASSIGNMENT</button>
     </mat-card-actions>
       </span>
-    <span *ngIf="assignment.submittedDate" class="ml-16">Submit Date: {{assignment.submittedDate}}<br></span>
+    <span *ngIf="assignment.submittedDate" class="ml-16 green">Submitted: {{assignment.submittedDate}}<br></span>
     <span *ngIf="assignment.grade" class="ml-16">Grade: {{assignment.grade}}</span>
   </mat-card>
 </div>
 
+<!--Teachers view of assignment-->
 <div *ngIf="authService.isLoggedIn.accountType == 'teacher'">
   <mat-accordion>
     <mat-expansion-panel>
@@ -38,7 +43,7 @@
           {{assignment.body}}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <app-submitions [assignementId]="assignment.id"></app-submitions>
+      <app-submissions [assignmentId]="assignment.id"></app-submissions>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

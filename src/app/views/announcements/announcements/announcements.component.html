@@ -3,5 +3,5 @@
   <button mat-raised-button (click)="openDialog()">ADD NEW ANNOUNCEMENT</button>
 </div>
 <div *ngFor="let announcement of getannouncements">
-  <app-announcement [announcement]="announcement"></app-announcement>
+  <app-announcement [announcement]="announcement" (updateChanges)="updatePage()"></app-announcement>
 </div>

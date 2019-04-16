@@ -3,7 +3,7 @@ import {DataService} from '../../../models/data.service';
 import {GetAnnouncements} from '../../../models/announcements/getAnnouncements';
 import {AuthService} from '../../../models/users/auth.service';
 import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-announcements',
@@ -29,7 +29,7 @@ export class AnnouncementsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddAnnouncementsDialogComponent,{
+    const dialogRef = this.dialog.open(AddAnnouncementsDialogComponent, {
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(() => {
@@ -38,12 +38,19 @@ export class AnnouncementsComponent implements OnInit {
     });
   }
 
+  updatePage() {
+    this.getAnnouncements();
+  }
 }
 
+
+/************************************
+ * Script for add announcement dialog
+ ***********************************/
 @Component({
   selector: 'app-announcement-add',
   templateUrl: 'announcement-add-dialog.html',
-  styleUrls: ['./announcement-add-dialog.scss']
+  styleUrls: ['./announcement-add-dialog.scss'],
 })
 export class AddAnnouncementsDialogComponent implements OnInit {
 

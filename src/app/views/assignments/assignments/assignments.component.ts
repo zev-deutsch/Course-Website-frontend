@@ -2,10 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../../models/data.service';
 import {ViewAssignments} from '../../../models/assignments/View-Assignments';
 import {AuthService} from '../../../models/users/auth.service';
-import {MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Assignment} from '../../../models/assignments/Assignment';
-import {User} from "../../../models/users/user";
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import * as _moment from 'moment';
+// import {default as _rollupMoment} from 'moment';
+
+// const moment = _rollupMoment || _moment;
+const moment =  _moment;
 
 @Component({
   selector: 'app-assignments',
@@ -17,11 +22,11 @@ export class AssignmentsComponent implements OnInit {
   constructor(private dataService: DataService, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getAssignment(this.authService.isLoggedIn);
+    this.getAssignment();
   }
 
-  getAssignment(data): void {
-    this.dataService.getAssignment(data).subscribe((res) => {
+  getAssignment(): void {
+    this.dataService.getAssignment(this.authService.isLoggedIn).subscribe((res) => {
       this.getAssignments = [];
       res.map((item) => {
         this.getAssignments.push(new ViewAssignments(item));
@@ -30,16 +35,34 @@ export class AssignmentsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddAssignmentDialogComponent,{
+    const dialogRef = this.dialog.open(AddAssignmentDialogComponent, {
       width: '500px'
     });
+    dialogRef.afterClosed().subscribe(() => {
+      // update page to include new assignment
+      this.getAssignment();
+    });
   }
+
+  // moment function from moment.js need this for html
+  moment() {
+    return moment();
+  }
+
 }
 
+
+/***********************************
+ * Script for add assignment dialog
+ **********************************/
 @Component({
   selector: 'app-assignment-add',
   templateUrl: 'assignment-add-dialog.html',
-  styleUrls: ['./assignment-add-dialog.scss']
+  styleUrls: ['./assignment-add-dialog.scss'],
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 
 })
 export class AddAssignmentDialogComponent implements OnInit {
@@ -47,7 +70,7 @@ export class AddAssignmentDialogComponent implements OnInit {
   newAssignment: FormGroup;
   isSubmitted = false;
   newAssignmentObject: Assignment;
-  datesConflict: boolean = false;
+  datesConflict = false;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -73,14 +96,14 @@ export class AddAssignmentDialogComponent implements OnInit {
     // Set isSubmitted to true
     this.isSubmitted = true;
 
-    // Check if dates are valid
-    if (Number(this.newAssignment.value.releaseDate) >= Number(this.newAssignment.value.dueDate)) {
-      this.datesConflict = true;
+    // If there are errors don't continue to process form
+    if (this.newAssignment.invalid) {
       return;
     }
 
-    // If there are errors don't continue to process form
-    if (this.newAssignment.invalid) {
+    // Check if dates are valid - due date after release date
+    if (moment(this.newAssignment.value.dueDate).isSameOrBefore(this.newAssignment.value.releaseDate)) {
+      this.datesConflict = true;
       return;
     }
 
@@ -88,9 +111,9 @@ export class AddAssignmentDialogComponent implements OnInit {
     this.newAssignmentObject = new Assignment(
       this.authService.isLoggedIn.id,
       this.newAssignment.value.subject,
-      String(Number(this.newAssignment.value.releaseDate)).substr(0, 10), // Date = current unix timestamp
-        String(Number(this.newAssignment.value.dueDate)).substr(0, 10),
-      this.newAssignment.value.body)
+      moment(this.newAssignment.value.releaseDate).format('YYYY-MM-DD'),
+      moment(this.newAssignment.value.dueDate).format('YYYY-MM-DD'),
+      this.newAssignment.value.body);
 
     // If valid send new assignment to database
     this.dataService.addAssignment(this.newAssignmentObject).subscribe(res => console.log(res));
@@ -101,6 +124,7 @@ export class AddAssignmentDialogComponent implements OnInit {
     // Snackbar message
     this.snackBar.open('Assignment added!', '', {
       duration: 2500,
+      horizontalPosition: 'center',
     });
   }
 }

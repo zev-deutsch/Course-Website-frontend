@@ -1,18 +1,19 @@
 export class ViewSubmissions {
+  // submissionid: number;
   assignmentid: number;
+  studentid: number;
+  name: string;
+  text: string;
   datesubmitted: string;
   grade: number;
-  id: number;
-  name: string;
-  studentid: number;
-  text: string;
+
   constructor(args?) {
-  this.assignmentid = args.assignmentid;
+  // this.submissionid = args.id;
+  this.assignmentid = args.assignmentid
+  this.studentid = args.studentid;
+  this.name = args.name;
+  this.text = args.text;
   this.datesubmitted = args.datesubmitted;
   this.grade = (args.grade) ? args.grade : null;
-  this.id = args.stID;
-  this.name = args.name;
-  this.studentid = args.studentid;
-  this.text = args.text;
   }
 }

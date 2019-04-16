@@ -28,6 +28,7 @@ export class AuthService {
     return this.http.post<LoggedInfo>(this.baseUrl + 'initials/login', params, {headers: this.getHeaders()});
   }
 
+  // sets isLoggedIn to (true) users information
   public loggedIn(userInfo: LoggedInfo) {
     this.isLoggedIn = userInfo;
   }

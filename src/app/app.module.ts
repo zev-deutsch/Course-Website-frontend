@@ -19,7 +19,6 @@ import { NavbarComponent } from './views/navbar/navbar.component';
 import {MatListModule, MatToolbarModule} from '@angular/material';
 import {MatRadioModule} from '@angular/material/radio';
 import { RegisterComponent } from './views/users/register/register.component';
-import { RegisterSuccessComponent } from './views/users/register-success/register-success.component';
 import {
   AddAnnouncementsDialogComponent,
   AnnouncementsComponent
@@ -33,7 +32,7 @@ import {
 import {AddAssignmentDialogComponent, AssignmentsComponent} from './views/assignments/assignments/assignments.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { SubmitionsComponent } from './views/submitions/submitions.component';
+import { SubmissionsComponent } from './views/assignments/submissions/submissions.component';
 import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
@@ -42,16 +41,14 @@ import {MatTableModule} from '@angular/material/table';
     LoginComponent,
     NavbarComponent,
     RegisterComponent,
-    RegisterSuccessComponent,
     AnnouncementsComponent,
     AnnouncementComponent,
-    RegisterSuccessComponent,
     AssignmentComponent,
     AssignmentsComponent,
     AssignmentSubmissionDialogComponent,
     AddAnnouncementsDialogComponent,
     AddAssignmentDialogComponent,
-    SubmitionsComponent
+    SubmissionsComponent
   ],
   imports: [
     BrowserModule,

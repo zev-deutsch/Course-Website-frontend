@@ -1,38 +1,29 @@
 <h1 class="mat-display-1 title">Assignments</h1>
-<!--<mat-tab-group>-->
-<!--  <mat-tab label="Not Yet Released"> <app-assignment></app-assignment> </mat-tab>-->
-<!--  <mat-tab label="Current "> <app-assignment></app-assignment> </mat-tab>-->
-<!--  <mat-tab label="Passed"> <app-assignment></app-assignment> </mat-tab>-->
-<!--</mat-tab-group>-->
+
 <div *ngIf="authService.isLoggedIn.accountType == 'teacher'" class="addbutton">
-<button mat-raised-button (click)="openDialog()">ADD NEW ASSIGNMENT</button>
-</div>
-<div *ngFor="let assignment of getAssignments">
-  <app-assignment [assignment]="assignment"></app-assignment>
+  <button mat-raised-button (click)="openDialog()">ADD NEW ASSIGNMENT</button>
 </div>
 
-
-
-<!--<mat-tab-group>-->
-<!--  <mat-tab label="Current">-->
-<!--    <div *ngFor="let assignment of getAssignments">-->
-<!--      <div *ngIf="assignment.releaseDate">-->
-<!--        <app-assignment [assignment]="assignment"></app-assignment>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </mat-tab>-->
-<!--  <mat-tab label="Not Yet Released">-->
-<!--    <div *ngFor="let assignment of getAssignments">-->
-<!--      <div *ngIf="assignment.releaseDate">-->
-<!--        <app-assignment [assignment]="assignment"></app-assignment>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </mat-tab>-->
-<!--  <mat-tab label="Passed">-->
-<!--    <div *ngFor="let assignment of getAssignments">-->
-<!--      <div *ngIf="assignment.releaseDate">-->
-<!--        <app-assignment [assignment]="assignment"></app-assignment>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </mat-tab>-->
-<!--</mat-tab-group>-->
+<mat-tab-group>
+  <mat-tab label="Current">
+    <div *ngFor="let assignment of getAssignments">
+      <div *ngIf="moment().isBetween(assignment.releaseDate, assignment.dueDate, null, '[]')">
+        <app-assignment [assignment]="assignment" [submittable]="true" (updateChanges)="getAssignment()"></app-assignment>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Not Yet Released">
+    <div *ngFor="let assignment of getAssignments">
+      <div *ngIf="moment().isBefore(assignment.releaseDate)">
+        <app-assignment [assignment]="assignment"></app-assignment>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Passed">
+    <div *ngFor="let assignment of getAssignments">
+      <div *ngIf="moment().isAfter(assignment.dueDate)">
+        <app-assignment [assignment]="assignment" [isOverdue]="!assignment.submittedDate"></app-assignment>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

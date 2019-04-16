@@ -8,10 +8,10 @@
     <p class="body">
       {{announcement.body}}
     </p>
-<!--    TODO remove button if student already marked this announcement as read-->
+<!--    TODO remove submittable if student already marked this announcement as read-->
   </mat-card-content>
 
-<!--  mark as read button for students-->
+<!--  mark as read submittable for students-->
   <mat-card-actions *ngIf="authService.isLoggedIn && authService.isLoggedIn.accountType == 'student'" class="bottom-button">
     <button mat-raised-button (click)="markRead()">MARK AS READ</button>
   </mat-card-actions>
@@ -27,7 +27,8 @@
         <mat-form-field>
           <textarea matInput #textbox> {{announcement.body}}</textarea>
         </mat-form-field>
-        <button type="submit" style="width: 95%;" mat-raised-button (click)="updateAnnouncement(textbox.value)">Submit</button>
+        <button type="submit" mat-raised-button (click)="updateAnnouncement(textbox.value)">Submit</button>
+        <button type="submit" mat-raised-button (click)="deleteAnnouncement()">Delete</button>
       </mat-expansion-panel>
 
   </mat-card-actions>

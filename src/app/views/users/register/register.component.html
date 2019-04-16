@@ -1,24 +1,41 @@
 <div class="mat-elevation-z4 main-box">
-  <h1 class="mat-display-1 mb-2">Register</h1>
-      <div class="inner-box">
+  <div *ngIf="!returnedId">
+    <h1 class="mat-display-1 mb-2">Register</h1>
+    <div class="inner-box">
 
-        <form #myform="ngForm" (ngSubmit)="register(myform)" class="form form-register">
-          <mat-form-field>
-            <input type="text" matInput placeholder="Name" name="name" ngModel  required>
-          </mat-form-field>
-          <mat-form-field>
-            <input type="password" matInput placeholder="Password" name="password" ngModel  required>
-          </mat-form-field>
-          <mat-form-field>
-            <input type="password" matInput placeholder="Confirm Password" name="confirmPassword" ngModel  required>
-          </mat-form-field>
-          <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="student" color="primary" checked>Student</mat-radio-button>
-            <mat-radio-button value="teacher" color="primary">Teacher</mat-radio-button>
-          </mat-radio-group>
-          <button type="submit" mat-flat-button color="primary" class="form-button">Register</button>
-        </form>
+      <form [formGroup]="registerForm" (ngSubmit)="submitRegistration()">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Full Name" formControlName="name" required>
+        </mat-form-field>
+        <div *ngIf="isSubmitted && formControls.name.errors" class="error-message">
+          <div *ngIf="formControls.name.errors.required">Please enter your name</div>
+        </div>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password" required>
+        </mat-form-field>
+        <div *ngIf="isSubmitted && formControls.password.errors" class="error-message">
+          <div *ngIf="formControls.password.errors.required">Password is required</div>
+        </div>
+        <mat-radio-group formControlName="accountType" required>
+          <mat-radio-button value="student" color="primary">Student</mat-radio-button>
+          <mat-radio-button value="teacher" color="primary">Teacher</mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="isSubmitted && formControls.accountType.errors" class="error-message">
+          <div *ngIf="formControls.accountType.errors.required">Please select an account type</div>
+        </div>
+        <button type="submit" mat-flat-button color="primary" class="form-button">Register</button>
+      </form>
 
-      </div>
+    </div>
+  </div>
+
+  <div *ngIf="returnedId">
+    <mat-icon class="success-icon">check_circle</mat-icon>
+    <p class="success-sentence">You have successfully registered</p>
+    <p>Your {{ accountType }} ID is:</p>
+    <strong class="large">{{ returnedId }}</strong>
+    <p>Please <a routerLink="../login">login</a> to your account with this ID</p>
+  </div>
+
 </div>
 
